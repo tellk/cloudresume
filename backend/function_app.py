@@ -32,7 +32,10 @@ def increment_view_count(req: func.HttpRequest, items: func.DocumentList, output
     
     # Use the output binding to save the updated document
     outputDocument.set(document)
-    
+
+    # set viewCount to string object
+    visitcount = str(document['viewCount'])
+    logging.info(f"raw viewCount: {document['viewCount']}")
     logging.info('viewCount incremented and document updated in the database')
-    logging.info(f"Document with ID webpage01 has viewCount: {document['viewCount']}")
-    return func.HttpResponse(f"Updated document viewCount to {document['viewCount']}", mimetype="text/plain")
+    logging.info('The new viewCount in the database is ' + visitcount)
+    return visitcount

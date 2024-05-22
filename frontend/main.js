@@ -1,20 +1,17 @@
-windows.addEventListener('DOMContentLoaded', (event) =>{
-	getVisitCount();
-})
+window.addEventListener('DOMContentLoaded', (event) => {
+    getVisitCount();
+});
 
-  const FunctionApi = '';
+const FunctionApi = 'https://cloudresume-funcapp.azurewebsites.net/api/read-items/webpage01?code=QlikjJ297T63ZPxhm9zWaD0dkOgXfsy0oTarejbND_YXAzFutFHANA%3D%3D';
 
-  const getVisitCount = () => {
-      let count = 30;
-      fetch(FunctionApi).then(response => {
-          return response.json()
-      }).then(response => {
-          console.log("Webpage called function API.");
-          count = response.count;
-          document.getElementById("counter").innerText = count;
-      }).catch(function(error){
-          console.log(error);
-      });
-
-      return count;
-  }
+const getVisitCount = () => {
+    fetch(FunctionApi).then(response => {
+        return response.text(); // Changed from response.json() to response.text()
+    }).then(text => {
+        console.log("Webpage called function API.");
+        console.log('Data received:', text);
+        document.getElementById("counter").innerText = text;
+    }).catch(function(error){
+        console.log(error);
+    });
+};
